@@ -4,6 +4,10 @@ import { secret_key } from "../service_account.js"
 
 export function signup(req, res) {
   const { email, password } = req.body;
+  if(email.length < 6 || password.length < 6) {
+    res.status(403).send({ message: 'Invalid request' })
+    return
+  }
   const newUser = {
     email: email.toLowerCase(),
     password,
